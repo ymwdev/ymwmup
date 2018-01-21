@@ -1,6 +1,6 @@
 {
   "name": "@ymwdev/ymwmup",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Ymw custom mup for AWS EBS",
   "main": "index.js",
   "scripts": {

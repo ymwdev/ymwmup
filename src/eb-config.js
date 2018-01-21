@@ -55,6 +55,10 @@ export function createDesiredConfig(mupConfig, buildLocation, api) {
       OptionName: 'HealthCheckPath',
       Value: '/aws-health-check-3984729847289743128904723'
     }, {
+      Namespace: 'aws:elasticbeanstalk:environment:process:default',
+      OptionName: 'HealthCheckInterval',
+      Value: '60'
+    }, {
       Namespace: 'aws:elasticbeanstalk:environment',
       OptionName: 'EnvironmentType',
       Value: 'LoadBalanced'
@@ -65,7 +69,8 @@ export function createDesiredConfig(mupConfig, buildLocation, api) {
     }, {
       Namespace: 'aws:elasticbeanstalk:command',
       OptionName: 'DeploymentPolicy',
-      Value: 'RollingWithAdditionalBatch'
+      Value: 'Rolling'
+      //Value: 'RollingWithAdditionalBatch'
     }, {
       Namespace: 'aws:elasticbeanstalk:command',
       OptionName: 'BatchSizeType',
@@ -101,7 +106,7 @@ export function createDesiredConfig(mupConfig, buildLocation, api) {
     }, {
       Namespace: 'aws:elasticbeanstalk:environment:process:default',
       OptionName: 'StickinessLBCookieDuration',
-      Value: '1200'
+      Value: '300'
     }, {
       Namespace: 'aws:elasticbeanstalk:environment:process:default',
       OptionName: 'StickinessType',

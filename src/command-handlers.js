@@ -184,9 +184,12 @@ export async function deploy(api) {
   await api.runCommand('beanstalk.clean');
 
   await api.runCommand('beanstalk.ssl');
+
+  console.log(chalk.yellow('\nYMW Mup for AWS - Deploy Finished'));
 }
 
 export async function logs(api) {
+  console.log(chalk.yellow('YMW Mup for AWS - view logs'));
   const logsContent = await getLogs(api);
 
   logsContent.forEach(({
@@ -201,6 +204,7 @@ export async function logs(api) {
 }
 
 export async function logsNginx(api) {
+  console.log(chalk.yellow('YMW Mup for AWS - view Nginx logs'));
   const logsContent = await getLogs(api);
 
   logsContent.forEach(({
@@ -326,6 +330,8 @@ export async function clean(api) {
 }
 
 export async function reconfig(api) {
+  console.log(chalk.yellow('YMW Mup for AWS - reconfig'));
+
   const config = api.getConfig();
   const {
     app,
@@ -422,6 +428,8 @@ export async function status(api) {
   const {
     environment
   } = names(api.getConfig());
+
+  console.log(chalk.yellow('YMW Mup for AWS - status'));
 
   const result = await beanstalk.describeEnvironmentHealth({
     AttributeNames: [
