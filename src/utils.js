@@ -7,7 +7,8 @@ import uuid from 'uuid';
 import {
   iam,
   beanstalk
-} from './aws';
+}
+from './aws';
 
 export function logStep(message) {
   console.log(chalk.blue(message));
@@ -61,7 +62,8 @@ async function retrieveEnvironmentInfo(api, count) {
 
   if (EnvironmentInfo.length > 0) {
     return EnvironmentInfo;
-  } else if (count > 5) {
+  }
+  else if (count > 5) {
     throw new Error('No logs');
   }
 
@@ -116,7 +118,9 @@ export function getNodeVersion(api, bundlePath) {
 
   star = JSON.parse(star);
 
+
   if (star.npmVersion) {
+    console.log(`Found star.json - Node:${star.nodeVersion} Npm:{star.npmVersion}`);
     return {
       nodeVersion: star.nodeVersion,
       npmVersion: star.npmVersion
@@ -126,15 +130,22 @@ export function getNodeVersion(api, bundlePath) {
   const nodeVersion = nodeVersionTxt.substr(1);
 
   if (nodeVersion.startsWith('4')) {
+    console.log(`Found node-version.txt - Node:${nodeVersion} Npm:4.6.1`);
     return {
       nodeVersion,
       npmVersion: '4.6.1'
     };
   }
 
+  console.log(`Nothing found - Node:${nodeVersion}`);
+
+  // new defaults
+
+  nodeVersion = '8.9.3';
+
   return {
     nodeVersion,
-    npmVersion: '3.10.5'
+    npmVersion: '5.5.1'
   };
 }
 
@@ -160,7 +171,8 @@ export async function ensureRoleExists(config, name, assumeRolePolicyDocument) {
     await iam.getRole({
       RoleName: name
     }).promise();
-  } catch (e) {
+  }
+  catch (e) {
     exists = false;
   }
 
@@ -179,7 +191,8 @@ export async function ensureInstanceProfileExists(config, name) {
     await iam.getInstanceProfile({
       InstanceProfileName: name
     }).promise();
-  } catch (e) {
+  }
+  catch (e) {
     exists = false;
   }
 
@@ -237,9 +250,11 @@ export async function ensurePoliciesAttached(config, role, policies) {
 export function coloredStatusText(envColor, text) {
   if (envColor === 'Green') {
     return chalk.green(text);
-  } else if (envColor === 'Yellow') {
+  }
+  else if (envColor === 'Yellow') {
     return chalk.yellow(text);
-  } else if (envColor === 'Red') {
+  }
+  else if (envColor === 'Red') {
     return chalk.red(text);
   }
   return text;

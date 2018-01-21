@@ -1,9 +1,11 @@
 import {
   difference
-} from 'lodash';
+}
+from 'lodash';
 import {
   names
-} from './utils';
+}
+from './utils';
 
 export function createDesiredConfig(mupConfig, buildLocation, api) {
   const {
@@ -88,6 +90,10 @@ export function createDesiredConfig(mupConfig, buildLocation, api) {
       Namespace: 'aws:elasticbeanstalk:healthreporting:system',
       OptionName: 'SystemType',
       Value: 'enhanced'
+    }, {
+      Namespace: 'aws:elasticbeanstalk:container:nodejs',
+      OptionName: 'NodeVersion',
+      Value: '8.9.3'
     }]
   };
 
@@ -122,7 +128,8 @@ export function scalingConfigChanged(currentConfig, mupConfig) {
     if (item.Namespace === 'aws:autoscaling:asg') {
       if (item.OptionName === 'MinSize') {
         currentMinInstances = item.Value;
-      } else if (item.OptionName === 'MaxSize') {
+      }
+      else if (item.OptionName === 'MaxSize') {
         currentMaxInstances = item.Value;
       }
     }
@@ -134,17 +141,15 @@ export function scalingConfigChanged(currentConfig, mupConfig) {
 
 export function scalingConfig({ minInstances, maxInstances }) {
   return {
-    OptionSettings: [
-      {
-        Namespace: 'aws:autoscaling:asg',
-        OptionName: 'MinSize',
-        Value: minInstances.toString()
-      }, {
-        Namespace: 'aws:autoscaling:asg',
-        OptionName: 'MaxSize',
-        Value: maxInstances.toString()
-      }
-    ]
+    OptionSettings: [{
+      Namespace: 'aws:autoscaling:asg',
+      OptionName: 'MinSize',
+      Value: minInstances.toString()
+    }, {
+      Namespace: 'aws:autoscaling:asg',
+      OptionName: 'MaxSize',
+      Value: maxInstances.toString()
+    }]
   };
 }
 
