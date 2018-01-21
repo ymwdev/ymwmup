@@ -94,6 +94,18 @@ export function createDesiredConfig(mupConfig, buildLocation, api) {
       Namespace: 'aws:elasticbeanstalk:container:nodejs',
       OptionName: 'NodeVersion',
       Value: '8.9.3'
+    }, {
+      Namespace: 'aws:elasticbeanstalk:environment:process:default',
+      OptionName: 'StickinessEnabled',
+      Value: 'true'
+    }, {
+      Namespace: 'aws:elasticbeanstalk:environment:process:default',
+      OptionName: 'StickinessLBCookieDuration',
+      Value: '1200'
+    }, {
+      Namespace: 'aws:elasticbeanstalk:environment:process:default',
+      OptionName: 'StickinessType',
+      Value: 'lb_cookie'
     }]
   };
 

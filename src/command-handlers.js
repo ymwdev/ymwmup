@@ -4,12 +4,14 @@ import {
   s3,
   beanstalk,
   autoScaling
-} from './aws';
+}
+from './aws';
 import upload from './upload';
 import {
   archiveApp,
   injectFiles
-} from './prepare-bundle';
+}
+from './prepare-bundle';
 import {
   coloredStatusText,
   ensureInstanceProfileExists,
@@ -21,24 +23,28 @@ import {
   names,
   tmpBuildPath,
   shouldRebuild
-} from './utils';
+}
+from './utils';
 import {
   largestVersion,
   ebVersions,
   oldVersions
-} from './versions';
+}
+from './versions';
 
 import {
   createDesiredConfig,
   diffConfig,
   scalingConfig,
   scalingConfigChanged
-} from './eb-config';
+}
+from './eb-config';
 
 import {
   waitForEnvReady,
   waitForHealth
-} from './env-ready';
+}
+from './env-ready';
 
 import updateSSLConfig from './certificates';
 
@@ -53,6 +59,7 @@ export async function setup(api) {
     serviceRole
   } = names(config);
 
+  console.log(chalk.yello('YMW Mup for AWS....'));
   logStep('=> Setting up');
 
   // Create bucket if needed
@@ -353,7 +360,8 @@ export async function reconfig(api) {
 
     console.log(' Created Environment');
     await waitForEnvReady(config, false);
-  } else {
+  }
+  else {
     const {
       ConfigurationSettings
     } = await beanstalk.describeConfigurationSettings({
@@ -534,7 +542,8 @@ export async function ssl(api) {
     if (Certificate.DomainValidationOptions[0].ValidationEmails.length > 0 || checks === 6) {
       emailsProvided = true;
       certificate = Certificate;
-    } else {
+    }
+    else {
       checks += 1;
 
       await new Promise((resolve) => {
@@ -564,7 +573,8 @@ export async function ssl(api) {
 
       console.log('Run "mup beanstalk ssl" after you have verified the domains, or to check the verification status');
     });
-  } else if (certificate.Status === 'ISSUED') {
+  }
+  else if (certificate.Status === 'ISSUED') {
     console.log(chalk.green('Certificate has been issued'));
     logStep('=> Updating Beanstalk SSL Config');
     await updateSSLConfig(config, certificateArn);

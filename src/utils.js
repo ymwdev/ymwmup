@@ -120,7 +120,7 @@ export function getNodeVersion(api, bundlePath) {
 
 
   if (star.npmVersion) {
-    console.log(`Found star.json - Node:${star.nodeVersion} Npm:{star.npmVersion}`);
+    console.log(`Found star.json - Node:${star.nodeVersion} Npm:${star.npmVersion}`);
     return {
       nodeVersion: star.nodeVersion,
       npmVersion: star.npmVersion
