@@ -59,7 +59,7 @@ export async function setup(api) {
     serviceRole
   } = names(config);
 
-  console.log(chalk.yello('YMW Mup for AWS....'));
+  console.log(chalk.yellow('YMW Mup for AWS....'));
   logStep('=> Setting up');
 
   // Create bucket if needed
