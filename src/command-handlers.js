@@ -186,6 +186,7 @@ export async function deploy(api) {
   await api.runCommand('beanstalk.ssl');
 
   console.log(chalk.yellow('\nYMW Mup for AWS - Deploy Finished'));
+  console.log(chalk.yellow(`App is running at ${config.app.env.ROOT_URL}`));
 }
 
 export async function logs(api) {
