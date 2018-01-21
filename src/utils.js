@@ -141,10 +141,10 @@ export function getNodeVersion(api, bundlePath) {
 
   // new defaults
 
-  nodeVersion = '8.9.3';
+  //nodeVersion = '8.9.3';
 
   return {
-    nodeVersion,
+    nodeVersion: '8.9.3',
     npmVersion: '5.5.1'
   };
 }
